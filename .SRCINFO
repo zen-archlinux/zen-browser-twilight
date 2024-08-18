@@ -1,6 +1,6 @@
 pkgbase = zen-browser-bin
 	pkgdesc = Standalone web browser - Static binaries from upstream
-	pkgver = 1.0.0.a.19
+	pkgver = 1.0.0.a.22
 	pkgrel = 1
 	url = https://github.com/zen-browser/desktop
 	arch = x86_64
@@ -18,14 +18,14 @@ pkgbase = zen-browser-bin
 	optdepends = pulseaudio: Audio support
 	optdepends = speech-dispatcher: Text-to-Speech
 	optdepends = hunspell-en_US: Spell checking, American English
-	provides = zen-browser=1.0.0.a.19
+	provides = zen-browser=1.0.0.a.22
 	conflicts = zen-browser
 	options = !strip
-	source = zen-browser-1.0.0-a.19.tar.bz2::https://github.com/zen-browser/desktop/releases/download/1.0.0-a.19/zen.linux-generic.tar.bz2
+	source = zen-browser-1.0.0-a.22.tar.bz2::https://github.com/zen-browser/desktop/releases/download/1.0.0-a.22/zen.linux-generic.tar.bz2
 	source = zen-browser.sh
 	source = zen-browser.desktop
 	source = policies.json
-	sha256sums = d38eb8c378a2483e0bc6e54f2a6b0a843db459e3d0690857279f818a0e72c575
+	sha256sums = 50b9535c86bae634a3de3fa9fe1fcfa5b2d1b95414424b907f908d1cfe9a0904
 	sha256sums = 642bcde5b15fddb712d10ed53299781108a265432237ab27a96c5c5c489718db
 	sha256sums = 2c81f08da79315c1a9d0fcf3a41ae6aa8b4bbe162181f6a8c41f37df27eb9870
 	sha256sums = ccf5105135118acb7d05a7f81383307e959a3b757eb7b645600b47bb7915b504
