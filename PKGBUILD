@@ -8,8 +8,8 @@
 
 pkgname=zen-browser-bin
 _pkgname=zen-browser
-realpkgver=1.0.0-a.23
-pkgver=1.0.0.a.23
+realpkgver=1.0.0-a.24
+pkgver=1.0.0.a.24
 pkgrel=1
 pkgdesc="Standalone web browser - Static binaries from upstream"
 arch=('x86_64' 'i686')
@@ -30,9 +30,9 @@ source=("zen-browser-$realpkgver.tar.bz2::https://github.com/zen-browser/desktop
         "$_pkgname.sh"
         "$_pkgname.desktop"
         "policies.json")
-sha256sums=('63c7f191eb3649dd9cee21a6616e9b9303e21136b2c73e349fe1647975dc22be'
+sha256sums=('3cbd510492131b6187999ee2b8de391016c2a78376f723dfc230f5415068057e'
             '642bcde5b15fddb712d10ed53299781108a265432237ab27a96c5c5c489718db'
-            '2c81f08da79315c1a9d0fcf3a41ae6aa8b4bbe162181f6a8c41f37df27eb9870'
+            'a9bbb912ab6c13d802f7ed07ebd9c1054b470c1ba4777df29bd23021a1f276fc'
             'ccf5105135118acb7d05a7f81383307e959a3b757eb7b645600b47bb7915b504')
 
 pkgver() {
