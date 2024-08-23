@@ -8,8 +8,8 @@
 
 pkgname=zen-browser-bin
 _pkgname=zen-browser
-realpkgver=1.0.0-a.27
-pkgver=1.0.0.a.27
+_realpkgver=1.0.0-a.28
+pkgver=1.0.0.a.28
 pkgrel=1
 pkgdesc="Standalone web browser - Static binaries from upstream"
 arch=('x86_64' 'i686')
@@ -26,17 +26,17 @@ options=(!strip)
 provides=("zen-browser=$pkgver")
 conflicts=('zen-browser')
 
-source=("zen-browser-$realpkgver.tar.bz2::https://github.com/zen-browser/desktop/releases/download/$realpkgver/zen.linux-generic.tar.bz2"
+source=("zen-browser-$_realpkgver.tar.bz2::https://github.com/zen-browser/desktop/releases/download/$_realpkgver/zen.linux-generic.tar.bz2"
         "$_pkgname.sh"
         "$_pkgname.desktop"
         "policies.json")
-sha256sums=('c5a24059ee9f4c8165128b5a03038f0880529c661e0d5ace44add3a1d24b284c'
+sha256sums=('34d63f8fb197ff9a8d9766e9a5ef8c486aaafad605d6a6790933697dbcb12983'
             '642bcde5b15fddb712d10ed53299781108a265432237ab27a96c5c5c489718db'
             'a9bbb912ab6c13d802f7ed07ebd9c1054b470c1ba4777df29bd23021a1f276fc'
             'ccf5105135118acb7d05a7f81383307e959a3b757eb7b645600b47bb7915b504')
 
 pkgver() {
-  echo "$realpkgver" | tr '-' '.'
+  echo "$_realpkgver" | tr '-' '.'
 }
 
 package() {
