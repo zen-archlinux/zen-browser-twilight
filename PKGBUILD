@@ -10,9 +10,9 @@
 pkgname=zen-browser-bin
 _pkgname=zen-browser
 _realpkgver=1.6b
-_desktopname=zen-release
+_desktopname=zen
 pkgver=1.6b
-pkgrel=3
+pkgrel=4
 pkgdesc="Performance oriented Firefox-based web browser"
 arch=('x86_64' 'i686')
 url="https://github.com/zen-browser/desktop"
@@ -34,7 +34,7 @@ source=("zen-browser-$_realpkgver.tar.bz2::https://github.com/zen-browser/deskto
         "policies.json")
 sha256sums=('0afad530028ea1742003ee2e038c88930a241dfe2a04c374b28c8f0ba1ef1b22'
             '642bcde5b15fddb712d10ed53299781108a265432237ab27a96c5c5c489718db'
-            'ed03ef7ec70aa199e5521fa593ebfbe30e8bfedff055bd2032bba701d552af00'
+            'a6371aa853b095d1c223f955e97a390b905abe5bcba38bbddd17408dd46fec94'
             'f93eb77db526147a8a20744905923a6eda79e2fbcc9f282e2f9228a7a995c798')
 
 package() {
