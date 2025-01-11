@@ -1,5 +1,6 @@
 # Maintainer: Luis Vervaet <luisvervaet@gmail.com>
 # Maintainer: Peter Jung <admin@ptr1337.dev>
+# Maintainer: Omansh Krishn <omansh@duck.com>
 # Contributor: NextWorks <nextworks@protonmail.com>
 # Contributor: Alad Wenter <alad@archlinux.org>
 # Contributor: Luna Jernberg <droidbittin@gmail.com>
@@ -7,12 +8,11 @@
 # Contributor: Simon Brulhart <simon@brulhart.me>
 # Contributor: Det <nimetonmaili g-mail>, Achilleas Pipinellis, speed145a, Schnouki, aus
 
-pkgname=zen-browser-bin
-_pkgname=zen-browser
-_realpkgver=1.6b
-_desktopname=zen
-pkgver=1.6b
-pkgrel=4
+pkgname=zen-browser-twilight-bin
+_pkgname=zen-browser-twilight
+_name=zen-twilight
+pkgver=1.7t.20250110.230347
+pkgrel=1
 pkgdesc="Performance oriented Firefox-based web browser"
 arch=('x86_64' 'i686')
 url="https://github.com/zen-browser/desktop"
@@ -24,49 +24,52 @@ optdepends=('ffmpeg: H264/AAC/MP3 decoding'
             'pulse-native-provider: Audio support'
             'speech-dispatcher: Text-to-Speech'
             'hunspell-en_US: Spell checking, American English')
-options=(!strip)
-provides=("zen-browser=$pkgver")
-conflicts=('zen-browser')
+options=(!strip !debug)
+provides=("zen-browser-twilight=${pkgver}")
 
-source=("zen-browser-$_realpkgver.tar.bz2::https://github.com/zen-browser/desktop/releases/download/$_realpkgver/zen.linux-x86_64.tar.bz2"
-        "$_pkgname.sh"
-        "$_desktopname.desktop"
+source=("https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.bz2"
+        "${_name}.desktop::https://raw.githubusercontent.com/zen-browser/desktop/refs/tags/twilight/AppDir/zen.desktop"
         "policies.json")
-sha256sums=('0afad530028ea1742003ee2e038c88930a241dfe2a04c374b28c8f0ba1ef1b22'
-            '642bcde5b15fddb712d10ed53299781108a265432237ab27a96c5c5c489718db'
-            'a6371aa853b095d1c223f955e97a390b905abe5bcba38bbddd17408dd46fec94'
+sha256sums=('SKIP'
+            'SKIP'
             'f93eb77db526147a8a20744905923a6eda79e2fbcc9f282e2f9228a7a995c798')
+
+pkgver() {
+  curl -s https://api.github.com/repos/zen-browser/desktop/releases | jq -r '.[].name' | grep Twilight | sed -E 's/.*- ([0-9.]+t) \(([0-9]{4})-([0-9]{2})-([0-9]{2}) at ([0-9]{2}):([0-9]{2}):([0-9]{2})\)/\1.\2\3\4.\5\6\7/'
+}
 
 package() {
   # Create directories
-  mkdir -p "$pkgdir"/usr/bin
-  mkdir -p "$pkgdir"/usr/share/applications
-  mkdir -p "$pkgdir"/opt
+  mkdir -p ${pkgdir}/usr/bin
+  mkdir -p ${pkgdir}/usr/share/applications
+  mkdir -p ${pkgdir}/opt
 
   # Install
-  cp -r zen/ "$pkgdir"/opt/$pkgname
+  cp -r zen/ ${pkgdir}/opt/${_pkgname}
 
   # Launchers
-  install -m755 $_pkgname.sh "$pkgdir"/usr/bin/$_pkgname
+   mv ${pkgdir}/opt/${_pkgname}/zen ${pkgdir}/opt/${_pkgname}/${_name}
+   ln -s /opt/${_pkgname}/${_name} ${pkgdir}/usr/bin/${_name}
 
-  # Desktops
-  install -m644 *.desktop "$pkgdir"/usr/share/applications/
+  # Desktop
+  sed -i "s|Exec=zen|Exec=${_name}|" ${_name}.desktop
+  sed -i "s|Icon=zen|Icon=${_name}|" ${_name}.desktop
+  install -m644 ${_name}.desktop ${pkgdir}/usr/share/applications/
 
   # Icons
   for i in 16x16 32x32 48x48 64x64 128x128; do
-    install -d "$pkgdir"/usr/share/icons/hicolor/$i/apps/
-    ln -s /opt/$pkgname/browser/chrome/icons/default/default${i/x*}.png \
-          "$pkgdir"/usr/share/icons/hicolor/$i/apps/$_pkgname.png
+    install -d "${pkgdir}"/usr/share/icons/hicolor/${i}/apps/
+    ln -s /opt/${_pkgname}/browser/chrome/icons/default/default${i/x*}.png ${pkgdir}/usr/share/icons/hicolor/${i}/apps/${_name}.png
   done
 
   # Use system-provided dictionaries
-  ln -Ts /usr/share/hunspell "$pkgdir"/opt/$pkgname/dictionaries
-  ln -Ts /usr/share/hyphen "$pkgdir"/opt/$pkgname/hyphenation
+  ln -Ts /usr/share/hunspell ${pkgdir}/opt/${_pkgname}/dictionaries
+  ln -Ts /usr/share/hyphen ${pkgdir}/opt/${_pkgname}/hyphenation
 
   # Use system certificates
-  ln -sf /usr/lib/libnssckbi.so "$pkgdir"/opt/$pkgname/libnssckbi.so
+  ln -sf /usr/lib/libnssckbi.so ${pkgdir}/opt/${_pkgname}/libnssckbi.so
 
   # Disable update checks (managed by pacman)
-  mkdir "$pkgdir"/opt/$pkgname/distribution
-  install -m644 "$srcdir"/policies.json "$pkgdir"/opt/$pkgname/distribution/
+  mkdir ${pkgdir}/opt/${_pkgname}/distribution
+  install -m644 ${srcdir}/policies.json ${pkgdir}/opt/${_pkgname}/distribution/
 }
