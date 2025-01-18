@@ -11,9 +11,9 @@
 pkgname=zen-browser-twilight-bin
 _pkgname=zen-browser-twilight
 _name=zen-twilight
-pkgver=1.7t.20250110.230347
+pkgver=1.7t.20250118.003745
 pkgrel=1
-pkgdesc="Performance oriented Firefox-based web browser"
+pkgdesc="Performance oriented Firefox-based web browser - Twilight"
 arch=('x86_64' 'i686')
 url="https://github.com/zen-browser/desktop"
 license=(MPL-2.0)
@@ -25,7 +25,8 @@ optdepends=('ffmpeg: H264/AAC/MP3 decoding'
             'speech-dispatcher: Text-to-Speech'
             'hunspell-en_US: Spell checking, American English')
 options=(!strip !debug)
-provides=("zen-browser-twilight=${pkgver}")
+provides=("zen-browser" "zen-browser-twilight" "zen-browser-twilight=${pkgver}")
+conflicts=("zen-twilight" "zen-twilight-bin")
 
 source=("https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.bz2"
         "${_name}.desktop::https://raw.githubusercontent.com/zen-browser/desktop/refs/tags/twilight/AppDir/zen.desktop"
