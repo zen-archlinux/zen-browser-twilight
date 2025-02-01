@@ -11,7 +11,7 @@
 pkgname=zen-browser-twilight-bin
 _pkgname=zen-browser-twilight
 _name=zen-twilight
-pkgver=1.7t.20250118.003745
+pkgver=1.7.4t.20250130.230343
 pkgrel=1
 pkgdesc="Performance oriented Firefox-based web browser - Twilight"
 arch=('x86_64' 'i686')
@@ -53,6 +53,7 @@ package() {
    ln -s /opt/${_pkgname}/${_name} ${pkgdir}/usr/bin/${_name}
 
   # Desktop
+  sed -i "s|Name=Zen Browser|Name=Zen Twilight|" ${_name}.desktop
   sed -i "s|Exec=zen|Exec=${_name}|" ${_name}.desktop
   sed -i "s|Icon=zen|Icon=${_name}|" ${_name}.desktop
   install -m644 ${_name}.desktop ${pkgdir}/usr/share/applications/
