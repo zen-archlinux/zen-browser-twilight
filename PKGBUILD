@@ -11,7 +11,7 @@
 pkgname=zen-browser-twilight-bin
 _pkgname=zen-browser-twilight
 _name=zen-twilight
-pkgver=1.7.4t.20250130.230343
+pkgver=1.7.4t.20250201.231222
 pkgrel=1
 pkgdesc="Performance oriented Firefox-based web browser - Twilight"
 arch=('x86_64' 'i686')
@@ -28,7 +28,7 @@ options=(!strip !debug)
 provides=("zen-browser" "zen-browser-twilight" "zen-browser-twilight=${pkgver}")
 conflicts=("zen-twilight" "zen-twilight-bin")
 
-source=("https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.bz2"
+source=("https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz"
         "${_name}.desktop::https://raw.githubusercontent.com/zen-browser/desktop/refs/tags/twilight/AppDir/zen.desktop"
         "policies.json")
 sha256sums=('SKIP'
