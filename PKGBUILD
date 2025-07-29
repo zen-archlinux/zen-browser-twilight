@@ -11,10 +11,10 @@
 pkgname=zen-browser-twilight-bin
 _pkgname=zen-browser-twilight
 _name=zen-twilight
-pkgver=1.7.4t.20250201.231222
+pkgver=1.15t.20250727.230742
 pkgrel=1
 pkgdesc="Performance oriented Firefox-based web browser - Twilight"
-arch=('x86_64' 'i686')
+arch=('x86_64' 'aarch64')
 url="https://github.com/zen-browser/desktop"
 license=(MPL-2.0)
 depends=(gtk3 libxt mime-types dbus-glib nss ttf-font systemd)
@@ -25,7 +25,7 @@ optdepends=('ffmpeg: H264/AAC/MP3 decoding'
             'speech-dispatcher: Text-to-Speech'
             'hunspell-en_US: Spell checking, American English')
 options=(!strip !debug)
-provides=("zen-browser" "zen-browser-twilight" "zen-browser-twilight=${pkgver}")
+provides=("zen-browser-twilight" "zen-browser-twilight=${pkgver}")
 conflicts=("zen-twilight" "zen-twilight-bin")
 
 source=("https://github.com/zen-browser/desktop/releases/download/twilight/zen.linux-x86_64.tar.xz"
@@ -36,7 +36,7 @@ sha256sums=('SKIP'
             'f93eb77db526147a8a20744905923a6eda79e2fbcc9f282e2f9228a7a995c798')
 
 pkgver() {
-  curl -s https://api.github.com/repos/zen-browser/desktop/releases | jq -r '.[].name' | grep Twilight | sed -E 's/.*- ([0-9.]+t) \(([0-9]{4})-([0-9]{2})-([0-9]{2}) at ([0-9]{2}):([0-9]{2}):([0-9]{2})\)/\1.\2\3\4.\5\6\7/'
+  curl -s https://api.github.com/repos/zen-browser/desktop/releases/tags/twilight | jq -r '.name' | sed -E 's/.*- ([0-9.]+t) \(([0-9]{4})-([0-9]{2})-([0-9]{2}) at ([0-9]{2}):([0-9]{2}):([0-9]{2})\)/\1.\2\3\4.\5\6\7/'
 }
 
 package() {
@@ -49,8 +49,8 @@ package() {
   cp -r zen/ ${pkgdir}/opt/${_pkgname}
 
   # Launchers
-   mv ${pkgdir}/opt/${_pkgname}/zen ${pkgdir}/opt/${_pkgname}/${_name}
-   ln -s /opt/${_pkgname}/${_name} ${pkgdir}/usr/bin/${_name}
+  mv ${pkgdir}/opt/${_pkgname}/zen ${pkgdir}/opt/${_pkgname}/${_name}
+  ln -s /opt/${_pkgname}/${_name} ${pkgdir}/usr/bin/${_name}
 
   # Desktop
   sed -i "s|Name=Zen Browser|Name=Zen Twilight|" ${_name}.desktop
